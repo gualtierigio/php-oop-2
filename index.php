@@ -2,17 +2,18 @@
 
 class User {
 
-    protected $name;
-    protected $surname;
+    use NameSurname;
+
     protected $age;
     protected $email;
     protected $password;
     protected $users = [];
 
-    protected function __construct($_email, $_password ){
+    public function __construct($_email, $_password){
 
         $this->email = $_email;
         $this->password = $_password;
+        
     }
 
     protected function logIn(){
@@ -31,6 +32,33 @@ class User {
             echo 'welcome in our website ' . $name;
         }
     }
+}
+
+class CreditCard extends Users {
+
+    use NameSurname;
+        
+    protected $cardNumber;
+    protected $ccd;
+    protected $expireDate;
+    
+    protected function __construct($_email, $_password, $name, $surname, $cardNumber, $ccd, $expireDate){
+
+        $this->name = $_name;
+        $this->surname = $_surname;
+        $this->cardNumber = $_cardNumber;
+        $this->ccd = $_ccd;
+        $this->expireDate = $_expireDate;
+
+        parent::__construct($_email, $_password);
+    }
+
+}
+
+trait NameSurname {
+    
+    protected $name;
+    protected $surname;
 }
 
 ?>
